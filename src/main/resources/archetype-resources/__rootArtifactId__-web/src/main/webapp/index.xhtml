@@ -1,0 +1,52 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:ui="http://java.sun.com/jsf/facelets"
+   xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+   template="/WEB-INF/templates/default.xhtml">
+   <ui:define name="content">
+
+		<f:metadata>
+			<f:viewParam name="result" value="${symbol_pound}{blogEntryListService.firstResult}" />
+		</f:metadata>
+
+
+		<ui:repeat var="blogEntry" value="${symbol_pound}{blogEntryListService.resultList}">
+			<div style="padding-bottom: 10px;">
+				<h2>${symbol_pound}{blogEntry.title}</h2>
+
+					<div style="color: ${symbol_pound}AAAAAA; font-size: smaller;">
+					${symbol_pound}{blogEntry.author.firstname}, ${symbol_pound}{blogEntry.author.surname}
+					-
+					<h:outputText value="${symbol_pound}{blogEntry.created}">
+						<f:convertDateTime pattern="dd-MM-yyyy" />
+					</h:outputText>
+				</div>
+			</div>
+
+			<div style="clear:both;">${symbol_pound}{blogEntry.shortContent}</div>
+
+			<div style="padding-bottom: 10px; margin: 10px 0px 30px 0px; border-bottom: 1px solid; border-color: ${symbol_pound}AAAAAA;">
+				<h:link outcome="view" value="Read more &${symbol_pound}187;">
+					<f:param name="id" value="${symbol_pound}{blogEntry.id}"/>
+				</h:link>
+			</div>
+		</ui:repeat>
+
+		<div>
+	        <h:link style="float:left;" rendered="${symbol_pound}{blogEntryListService.previousExists}" value="&${symbol_pound}171; Previous Page">
+	            <f:param name="result" value="${symbol_pound}{blogEntryListService.previousFirstResult}"/>
+	        </h:link>
+
+	        <h:link style="float:right;"  rendered="${symbol_pound}{blogEntryListService.nextExists}" value="Next Page  &${symbol_pound}187;">
+	            <f:param name="result" value="${symbol_pound}{blogEntryListService.nextFirstResult}"/>
+	        </h:link>
+		</div>
+
+
+   </ui:define>
+</ui:composition>

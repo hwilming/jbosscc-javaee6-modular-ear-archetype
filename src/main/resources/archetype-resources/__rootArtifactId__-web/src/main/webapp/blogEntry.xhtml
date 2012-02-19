@@ -1,0 +1,70 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	template="/WEB-INF/templates/default.xhtml">
+	<ui:define name="content">
+
+		<f:metadata>
+			<f:viewParam name="id" value="${symbol_pound}{blogEntryService.id}" />
+		</f:metadata>
+
+		<h:form>
+			<h:link value="&${symbol_pound}171; Overview" outcome="index" action="${symbol_pound}{blogEntryService.end()}"></h:link>
+		</h:form>
+
+		<div style="padding-bottom: 10px;">
+			<h2>${symbol_pound}{blogEntryService.instance.title}</h2>
+
+			<div style="color: ${symbol_pound}AAAAAA; font-size: smaller;">
+				${symbol_pound}{blogEntryService.instance.author.firstname}, ${symbol_pound}{blogEntryService.instance.author.surname}
+				-
+				<h:outputText value="${symbol_pound}{blogEntryService.instance.created}">
+					<f:convertDateTime pattern="dd-MM-yyyy" />
+				</h:outputText>
+
+				<h:form rendered="${symbol_pound}{currentUser.id eq blogEntryService.instance.author.id}">
+					<h:link value="Edit" outcome="edit">
+						<f:param name="cid" value="${symbol_pound}{javax.enterprise.context.conversation.id}"/>
+					</h:link>
+					&${symbol_pound}160;
+					<h:commandLink value="Delete" action="${symbol_pound}{blogEntryService.delete}"/>
+				</h:form>
+			</div>
+		</div>
+
+		<div style="clear: both; padding-bottom: 10px; border-bottom: 1px solid; border-color: ${symbol_pound}AAAAAA;">${symbol_pound}{blogEntryService.instance.content}</div>
+
+
+		<div style="padding: 20px 0px 20px 0px;">
+			<b>Comments</b>
+			<ui:repeat var="comment" value="${symbol_pound}{commentListService.resultList}">
+				<div style="padding: 20px 0px 20px 0px; border-bottom: 1px solid; border-color: ${symbol_pound}AAAAAA;">
+					${symbol_pound}{comment.content}
+
+					<div style="color: ${symbol_pound}AAAAAA; font-size: smaller;">
+						${symbol_pound}{comment.author.firstname}, ${symbol_pound}{comment.author.surname}
+						-
+						<h:outputText value="${symbol_pound}{comment.created}">
+							<f:convertDateTime pattern="dd-MM-yyyy" />
+						</h:outputText>
+					</div>
+				</div>
+			</ui:repeat>
+		</div>
+
+
+		<h:panelGroup rendered="${symbol_pound}{identity.loggedIn}">
+			<h:form>
+				<h:inputTextarea style="width:99%;"  value="${symbol_pound}{commentService.instance.content}"  rows="10"></h:inputTextarea>
+				<h:commandButton action="${symbol_pound}{commentService.save()}" value="Save"></h:commandButton>
+			</h:form>
+		</h:panelGroup>
+
+	</ui:define>
+</ui:composition>

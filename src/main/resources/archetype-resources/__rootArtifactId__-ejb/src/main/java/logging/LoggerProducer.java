@@ -1,0 +1,17 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+package ${package}.logging;
+
+import java.util.logging.Logger;
+
+import javax.enterprise.inject.Produces;
+import javax.enterprise.inject.spi.InjectionPoint;
+
+public class LoggerProducer {
+	@Produces
+	public Logger produceLog(InjectionPoint injectionPoint) {
+		return Logger.getLogger(injectionPoint.getMember().getDeclaringClass()
+				.getName());
+	}
+}
