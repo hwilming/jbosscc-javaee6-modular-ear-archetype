@@ -4,7 +4,7 @@
 
 	<groupId>de.akquinet.jbosscc</groupId>
 	<artifactId>jbosscc-javaee6-modular-ear-archetype</artifactId>
-	<version>1.0</version>
+	<version>1.1-SNAPSHOT</version>
 	<packaging>maven-archetype</packaging>
 	<name>JBosscc Java EE 6 - Modular EAR archetype</name>
 	<url>https://github.com/hwilming/jbosscc-javaee6-modular-ear-archetype/</url>
