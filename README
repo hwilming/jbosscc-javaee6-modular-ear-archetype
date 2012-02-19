@@ -1,1 +1,255 @@
 Java EE 6 - Modular EAR Archetype
+----------------------------------------------------------------------------------------------------------------------------------------
+
+Getting started
+
+1. Generate the project skeleton from the archetype
+----------------------------------------------------------------------------------------------------------------------------------------
+
+mvn archetype:generate \
+   -DarchetypeArtifactId=jbosscc-javaee6-modular-ear-archetype \
+   -DarchetypeGroupId=de.akquinet.jbosscc \
+   -DarchetypeVersion=1.0-SNAPSHOT
+
+
+
+INFO] Scanning for projects...
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Maven Stub Project (No POM) 1
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] >>> maven-archetype-plugin:2.1:generate (default-cli) @ standalone-pom >>>
+[INFO] 
+[INFO] <<< maven-archetype-plugin:2.1:generate (default-cli) @ standalone-pom <<<
+[INFO] 
+[INFO] --- maven-archetype-plugin:2.1:generate (default-cli) @ standalone-pom ---
+[INFO] Generating project in Interactive mode
+Downloading: http://repo1.maven.org/maven2/de/akquinet/jbosscc/jbosscc-javaee6-modular-ear-archetype/1.0-SNAPSHOT/maven-metadata.xml
+Downloading: http://repo1.maven.org/maven2/de/akquinet/jbosscc/jbosscc-javaee6-modular-ear-archetype/1.0-SNAPSHOT/maven-metadata.xml
+Define value for property 'groupId': : com.company
+Define value for property 'artifactId': : myproject       
+Define value for property 'version':  1.0-SNAPSHOT: : 
+Define value for property 'package':  com.company: : 
+Confirm properties configuration:
+groupId: com.company
+artifactId: myproject
+version: 1.0-SNAPSHOT
+package: com.company
+ Y: : Y
+[INFO] ----------------------------------------------------------------------------
+[INFO] Using following parameters for creating project from Archetype: jbosscc-javaee6-modular-ear-archetype:1.0-SNAPSHOT
+[INFO] ----------------------------------------------------------------------------
+[INFO] Parameter: groupId, Value: com.company
+[INFO] Parameter: artifactId, Value: myproject
+[INFO] Parameter: version, Value: 1.0-SNAPSHOT
+[INFO] Parameter: package, Value: com.company
+[INFO] Parameter: packageInPathFormat, Value: com/company
+[INFO] Parameter: package, Value: com.company
+[INFO] Parameter: version, Value: 1.0-SNAPSHOT
+[INFO] Parameter: groupId, Value: com.company
+[INFO] Parameter: artifactId, Value: myproject
+...
+
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 58.714s
+[INFO] Finished at: Sun Feb 19 16:02:54 CET 2012
+[INFO] Final Memory: 7M/81M
+[INFO] ------------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------
+2.  Examine the generated Application
+----------------------------------------------------------------------------------------------------------------------------------------
+
+.
+|-- myproject-bootstrap
+|   |-- pom.xml
+|   `-- src
+|       `-- main
+|           |-- java
+|           |   `-- com
+|           |       `-- company
+|           |           |-- ApplicationBootstrap.java
+|           |           |-- BlogEntryTestdata.java
+|           |           |-- CommentTestdata.java
+|           |           `-- UserTestdata.java
+|           `-- resources
+|               `-- META-INF
+|                   `-- beans.xml
+|-- myproject-ear
+|   `-- pom.xml
+|-- myproject-ejb
+|   |-- pom.xml
+|   `-- src
+|       |-- main
+|       |   |-- java
+|       |   |   `-- com
+|       |   |       `-- company
+|       |   |           |-- dao
+|       |   |           |   |-- BlogEntryDao.java
+|       |   |           |   |-- BlogEntryDaoBean.java
+|       |   |           |   |-- CommentDao.java
+|       |   |           |   |-- CommentDaoBean.java
+|       |   |           |   |-- UserDao.java
+|       |   |           |   |-- UserDaoBean.java
+|       |   |           |   `-- common
+|       |   |           |       |-- AbstractDaoBean.java
+|       |   |           |       `-- Dao.java
+|       |   |           `-- logging
+|       |   |               `-- LoggerProducer.java
+|       |   `-- resources
+|       |       `-- META-INF
+|       |           `-- beans.xml
+|       `-- test
+|           `-- java
+|               `-- com
+|                   `-- company
+|                       `-- dao
+|                           |-- BlogEntryDaoTest.java
+|                           |-- CommentEntryDaoTest.java
+|                           `-- UserDaoTest.java
+|-- myproject-jpa
+|   |-- pom.xml
+|   `-- src
+|       |-- main
+|       |   |-- java
+|       |   |   `-- com
+|       |   |       `-- company
+|       |   |           |-- BlogEntry.java
+|       |   |           |-- Comment.java
+|       |   |           |-- User.java
+|       |   |           `-- common
+|       |   |               `-- AbstractEntity.java
+|       |   `-- resources
+|       |       `-- META-INF
+|       |           `-- persistence.xml
+|       `-- test
+|           |-- java
+|           |   `-- com
+|           |       `-- company
+|           |           |-- BlogEntryTest.java
+|           |           |-- CommentTest.java
+|           |           |-- UserTest.java
+|           |           `-- testdata
+|           |               |-- BlogEntryTestdataBuilder.java
+|           |               |-- CommentTestdataBuilder.java
+|           |               `-- UserTestdataBuilder.java
+|           `-- resources
+|               |-- META-INF
+|               |   `-- persistence.xml
+|               `-- needle.properties
+|-- myproject-web
+|   |-- pom.xml
+|   `-- src
+|       |-- main
+|       |   |-- java
+|       |   |   `-- com
+|       |   |       `-- company
+|       |   |           |-- BlogEntryListService.java
+|       |   |           |-- BlogEntryService.java
+|       |   |           |-- CommentListService.java
+|       |   |           |-- CommentService.java
+|       |   |           |-- annotation
+|       |   |           |   `-- CurrentUser.java
+|       |   |           `-- security
+|       |   |               |-- Authenticator.java
+|       |   |               |-- HttpSessionProducer.java
+|       |   |               `-- Identity.java
+|       |   `-- webapp
+|       |       |-- WEB-INF
+|       |       |   |-- beans.xml
+|       |       |   |-- faces-config.xml
+|       |       |   |-- templates
+|       |       |   |   `-- default.xhtml
+|       |       |   `-- web.xml
+|       |       |-- blogEntry.xhtml
+|       |       |-- blogEntryEdit.xhtml
+|       |       |-- error.xhtml
+|       |       |-- header.xhtml
+|       |       |-- index.html
+|       |       |-- index.xhtml
+|       |       |-- resources
+|       |       |   |-- css
+|       |       |   |   `-- screen.css
+|       |       |   `-- images
+|       |       |       |-- favicon.ico
+|       |       |       `-- header.png
+|       |       `-- viewExpired.xhtml
+|       `-- test
+|           `-- java
+|               `-- com
+|                   `-- company
+|                       |-- BlogEntryListServiceTest.java
+|                       |-- BlogEntryServiceTest.java
+|                       |-- CommentListServiceTest.java
+|                       |-- CommentServiceTest.java
+|                       |-- injectionprovider
+|                       |   `-- CurrentUserInjectionProvider.java
+|                       `-- security
+|                           `-- AuthenticatorTest.java
+`-- pom.xml
+
+61 directories, 65 files
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------
+3. Build the Application
+----------------------------------------------------------------------------------------------------------------------------------------
+
+$ cd myproject
+$ mvn install
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] myproject Parent
+[INFO] myproject JPA Datamodel module
+[INFO] myproject EJB module
+[INFO] myproject Bootstrap module
+[INFO] myproject Web module
+[INFO] myproject EAR module
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+
+[...]
+
+INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary:
+[INFO] 
+[INFO] myproject Parent ............................................. SUCCESS [0.239s]
+[INFO] myproject JPA Datamodel module .................... SUCCESS [4.378s]
+[INFO] myproject EJB module ...................................... SUCCESS [2.862s]
+[INFO] myproject Bootstrap module ............................ SUCCESS [0.679s]
+[INFO] myproject Web module .................................... SUCCESS [2.745s]
+[INFO] myproject EAR module .................................... SUCCESS [0.459s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 11.744s
+[INFO] Finished at: Sun Feb 19 16:15:22 CET 2012
+[INFO] Final Memory: 15M/81M
+[INFO] ------------------------------------------------------------------------
+
+
+----------------------------------------------------------------------------------------------------------------------------------------
+4. Deploy the Application
+----------------------------------------------------------------------------------------------------------------------------------------
+
+The deployment was tested with the JBoss AS 7.x.
+
+$ cp myproject-ear/target/myproject.ear $JBOSS_HOME/standalone/deployments/
+
+$ JBOSS_HOME/bin/standalone.sh
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------
+5. Access the Application
+----------------------------------------------------------------------------------------------------------------------------------------
+
+Navigate to http://localhost:8080/myproject
