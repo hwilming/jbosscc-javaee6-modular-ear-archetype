@@ -11,6 +11,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<javaee6.web.spec.version>2.0.0.Final</javaee6.web.spec.version>
+		<hibernate.jpamodelgen.version>1.2.0.CR1</hibernate.jpamodelgen.version>
 	</properties>
 
 	<dependencyManagement>
@@ -97,7 +98,7 @@
 			<dependency>
 				<groupId>org.hibernate</groupId>
 				<artifactId>hibernate-jpamodelgen</artifactId>
-				<version>1.2.0.CR1</version>
+				<version>${hibernate.jpamodelgen.version}</version>
 				<scope>compile</scope>
 			</dependency>
 

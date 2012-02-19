@@ -62,6 +62,7 @@
 					<dependency>
 						<groupId>org.hibernate</groupId>
 						<artifactId>hibernate-jpamodelgen</artifactId>
+						<version>${hibernate.jpamodelgen.version}</version>
 						<scope>compile</scope>
 					</dependency>
 				</dependencies>
